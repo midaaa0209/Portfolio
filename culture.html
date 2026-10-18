@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Maranao Heritage Museum | Hamidah's Portfolio, Page 2</title>
+  <meta name="description" content="An interactive museum of Maranao heritage: kulintang, malong, Okir, torogan, traditions, a cultural timeline and vocabulary.">
+
+  <!-- Fonts (optional - the page falls back to system fonts if offline) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- All styling lives in culture.css -->
+  <link rel="stylesheet" href="culture.css">
+  <script>
+    document.documentElement.classList.add('js');
+    try { if (sessionStorage.getItem('curtain') === '1') document.documentElement.classList.add('arriving'); } catch (e) {}
+  </script>
+</head>
+<body>
+  <noscript>This interactive museum needs JavaScript turned on to show its exhibits.</noscript>
+
+  <!-- Page transition curtain (opens when you arrive from page 1) -->
+  <div class="curtain" id="curtain" aria-hidden="true"><div class="half l"></div><div class="half r"></div><div class="seal">✦</div></div>
+
+  <a class="skip" href="#main">Skip to content</a>
+
+  <!-- ================= NAVIGATION ================= -->
+  <header class="nav" id="nav">
+    <div class="nav-inner">
+      <a class="brand" href="#lobby"><span class="brand-mark" aria-hidden="true">✦</span><span>Maranao Heritage</span></a>
+      <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open the museum menu"><span></span><span></span><span></span></button>
+      <nav class="menu" id="menu" aria-label="Museum halls">
+        <ul>
+          <li><a href="#lobby">Lobby</a></li>
+          <li><a href="#music">Kulintang</a></li>
+          <li><a href="#textiles">Textiles</a></li>
+          <li><a href="#okir">Visual Culture</a></li>
+          <li><a href="#torogan">Architecture</a></li>
+          <li><a href="#attire">Attire</a></li>
+          <li><a href="#life">Traditions</a></li>
+          <li><a href="#timeline">Timeline</a></li>
+          <li><a href="#words">Words</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+        </ul>
+        <!-- RETURN BUTTON: goes back to page 1 (the address is RETURN_URL in culture.js) -->
+        <a class="return" href="index.html" data-transition>Return to my box</a>
+      </nav>
+    </div>
+    <div class="progress" id="progress" aria-hidden="true"></div>
+  </header>
+
+  <main id="main">
+
+    <!-- ================= LOBBY (welcome) ================= -->
+    <section class="lobby" id="lobby" aria-labelledby="lobbyTitle">
+      <div class="orn o1" aria-hidden="true"></div>
+      <div class="orn o2" aria-hidden="true"></div>
+      <div class="orn o3" aria-hidden="true"></div>
+      <div class="arch">
+        <p class="kicker">Page 2 · A museum of my culture</p>
+        <h1 id="lobbyTitle">Discover the Rich Heritage of the Maranao People</h1>
+        <p class="lead">An exploration of identity, artistry, traditions, and the living culture of the people of the lake.</p>
+        <button class="btn-gold" id="beginBtn" type="button">Begin the Journey</button>
+      </div>
+    </section>
+
+    <!-- ================= WELCOME + MUSEUM MAP ================= -->
+    <section class="welcome" id="welcome" aria-labelledby="welcomeTitle">
+      <div class="inner">
+        <p class="kicker center">Welcome to the museum</p>
+        <h2 id="welcomeTitle" class="center">The People of the Lake</h2>
+        <div class="welcome-grid">
+          <div class="welcome-text reveal">
+            <p>The Maranao are a people associated with the Lake Lanao region of Mindanao, Philippines. The name <em>Maranao</em> (also spelled <em>Meranaw</em>) is commonly translated as <strong>"people of the lake"</strong>.</p>
+            <p>This is a living culture, not something that belongs only to the past. It includes music, weaving, carving, architecture, stories, food, language and everyday community life, and it cannot be reduced to a stereotype. No single exhibit can speak for every Maranao person, so each hall shares selected, documented parts of a culture that is rich and diverse.</p>
+          </div>
+          <ul class="quick reveal" aria-label="Quick facts">
+            <li><span class="qi" aria-hidden="true">🌊</span><b>Homeland</b><span>The Lake Lanao region, Mindanao</span></li>
+            <li><span class="qi" aria-hidden="true">🗣️</span><b>Language</b><span>Maranao (Meranaw)</span></li>
+            <li><span class="qi" aria-hidden="true">📜</span><b>Epic</b><span>The Darangen, listed by UNESCO</span></li>
+            <li><span class="qi" aria-hidden="true">🎨</span><b>Arts</b><span>Okir carving, weaving, kulintang</span></li>
+          </ul>
+        </div>
+
+        <h3 class="map-title center">Museum Map · choose a hall</h3>
+        <div class="map" id="map"></div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION A: MUSIC ================= -->
+    <section class="hall" id="music" aria-labelledby="musicTitle">
+      <div class="band" aria-hidden="true"></div>
+      <div class="inner">
+        <header class="hall-head reveal">
+          <p class="kicker">Section 1</p>
+          <h2 id="musicTitle">Kulintang: The Sound of the Maranao</h2>
+          <p>The kulintang is a row of small, tuned, knobbed gongs laid on a frame. Musical traditions differ from community to community in Mindanao and the southern Philippines, so this exhibit describes only the general picture.</p>
+        </header>
+        <div class="wall" id="musicBody"></div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION B: TEXTILES ================= -->
+    <section class="hall alt" id="textiles" aria-labelledby="textilesTitle">
+      <div class="band" aria-hidden="true"></div>
+      <div class="inner">
+        <header class="hall-head reveal">
+          <p class="kicker">Section 2</p>
+          <h2 id="textilesTitle">Textile Artistry: Malong and Landap</h2>
+          <p>The malong is a tubular textile garment worn in various communities in Mindanao, including Maranao communities. Click the frame to read more.</p>
+        </header>
+        <div class="wall"><div class="exhibits" id="textileGrid"></div></div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION C: OKIR ================= -->
+    <section class="hall" id="okir" aria-labelledby="okirTitle">
+      <div class="band" aria-hidden="true"></div>
+      <div class="inner">
+        <header class="hall-head reveal">
+          <p class="kicker">Section 3</p>
+          <h2 id="okirTitle">Visual Culture: Okir and Metalwork</h2>
+          <p>Okir is a distinctive artistic tradition of Maranao visual culture: flowing, plant-like and geometric forms carved, painted and woven into many kinds of objects and buildings.</p>
+        </header>
+
+        <h3 class="sub">Documented examples</h3>
+        <div class="wall"><div class="exhibits" id="okirExamples"></div></div>
+
+        <h3 class="sub">Where Okir appears</h3>
+        <ul class="chips" id="okirWhere"></ul>
+      </div>
+    </section>
+
+    <!-- ================= SECTION D: TOROGAN ================= -->
+    <section class="hall alt" id="torogan" aria-labelledby="toroganTitle">
+      <div class="band" aria-hidden="true"></div>
+      <div class="inner">
+        <header class="hall-head reveal">
+          <p class="kicker">Section 4</p>
+          <h2 id="toroganTitle">Royal Architecture: The Torogan</h2>
+          <p>The torogan is a traditional Maranao house of a chief or noble family. It is a symbol of status and was also a gathering place for the community. Not every Maranao family lived in a torogan, and today's households live in many kinds of homes.</p>
+        </header>
+        <div class="wall"><div class="exhibits" id="toroganGrid"></div></div>
+        <div class="two-col">
+          <div class="info-card reveal">
+            <h3>What to look for</h3>
+            <ul class="ticks">
+              <li>Raised on large wooden columns</li>
+              <li>Built without nails, using fitted joints and fiber lashings</li>
+              <li><em>Panolong</em>: carved beam ends that look like the prow of a boat, often showing the <em>niyaga</em>, a mythical sea serpent</li>
+              <li>Okir carving on posts and beams, often painted in bright colors</li>
+              <li>A large open main hall with a thatched roof</li>
+            </ul>
+          </div>
+          <div class="info-card reveal">
+            <h3>Protecting heritage</h3>
+            <p>Few early torogan remain, and many have been replaced by newer houses. The Kawayan Torogan in Marantao, Lanao del Sur was declared a National Cultural Treasure by the National Museum in 2008. Other torogan, such as the Dayawan Torogan in Marawi and the Laguindab Torogan in Ganassi, need major funds for rehabilitation.</p>
+            <p>Protecting these buildings means protecting the skills, stories and community memories connected to them.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION E: ATTIRE ================= -->
+    <section class="hall" id="attire" aria-labelledby="attireTitle">
+      <div class="band" aria-hidden="true"></div>
+      <div class="inner">
+        <header class="hall-head reveal">
+          <p class="kicker">Section 5</p>
+          <h2 id="attireTitle">Identity and Attire</h2>
+          <p>Traditional dress differs by occasion, community and personal taste. This frame shows an example, not a single standard, and no garment here stands for every Maranao person.</p>
+        </header>
+        <div class="wall"><div class="exhibits" id="attireGrid"></div></div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION F: LIFE ================= -->
+    <section class="hall alt" id="life" aria-labelledby="lifeTitle">
+      <div class="band" aria-hidden="true"></div>
+      <div class="inner">
+        <header class="hall-head reveal">
+          <p class="kicker">Section 6</p>
+          <h2 id="lifeTitle">Traditions, Community, and Everyday Life</h2>
+          <p>Each card has pictures and a short, documented introduction. Choose a picture to see it larger, or <em>Read more</em> to go deeper.</p>
+        </header>
+        <div class="topics" id="topics"></div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION G: TIMELINE ================= -->
+    <section class="hall" id="timeline" aria-labelledby="timelineTitle">
+      <div class="band" aria-hidden="true"></div>
+      <div class="inner">
+        <header class="hall-head reveal">
+          <p class="kicker">Section 7</p>
+          <h2 id="timelineTitle">Maranao Heritage: Historical and Cultural Milestones</h2>
+          <p>Select an entry to open it. Each one gives a short explanation and where to read the source.</p>
+        </header>
+        <ol class="tl" id="tl"></ol>
+      </div>
+    </section>
+
+    <!-- ================= SECTION H: WORDS ================= -->
+    <section class="hall alt" id="words" aria-labelledby="wordsTitle">
+      <div class="band" aria-hidden="true"></div>
+      <div class="inner">
+        <header class="hall-head reveal">
+          <p class="kicker">Section 8</p>
+          <h2 id="wordsTitle">Maranao Vocabulary Showcase</h2>
+          <p>Tap a card to reveal what it means.</p>
+        </header>
+        <div class="vocab" id="vocab"></div>
+      </div>
+    </section>
+
+    <!-- ================= THE GALLERY ================= -->
+    <section class="hall" id="gallery" aria-labelledby="galleryTitle">
+      <div class="band" aria-hidden="true"></div>
+      <div class="inner">
+        <header class="hall-head reveal">
+          <p class="kicker">Section 9</p>
+          <h2 id="galleryTitle">Cultural Image and Media Gallery</h2>
+          <p>Six pictures from the museum. Choose a thumbnail to see it larger, with its caption and credit.</p>
+        </header>
+        <div class="gallery" id="galleryGrid"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= SOURCES AND CREDITS ================= -->
+  <section class="credits" id="creditsSec" aria-labelledby="creditsTitle">
+    <div class="inner">
+      <h2 id="creditsTitle">Sources and Credits</h2>
+      <ul class="sources" id="sources"></ul>
+      <button class="btn-ghost" id="topBtn2" type="button">Back to the top ↑</button>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="footer">
+    <div class="inner foot-grid">
+      <div class="foot-left">
+        <h2>Maranao Culture Showcase</h2>
+        <p>Prepared by Hamidah H. Gunting ("Bambi")</p>
+        <p>Tomas Cabili National High school Grade 12 - TVL 3 CSS</p>
+      </div>
+      <div class="foot-right">
+        <!-- RETURN BUTTON: goes back to page 1 (the address is RETURN_URL in culture.js) -->
+        <a class="btn-gold" href="index.html" data-transition>Return to my box</a>
+      </div>
+    </div>
+  </footer>
+
+  <button class="to-top" id="toTop" type="button" aria-label="Back to top" hidden>↑</button>
+
+  <!-- ================= DETAIL EXHIBIT (modal) ================= -->
+  <div class="overlay" id="detail" hidden>
+    <section class="panel" role="dialog" aria-modal="true" aria-labelledby="dTitle">
+      <button class="close" type="button" data-close aria-label="Close this exhibit and return to the museum">✕</button>
+      <div class="dbody">
+        <div class="dmedia">
+          <div class="frame static"><span class="mat" id="dFrame"></span></div>
+          <p class="credit" id="dCredit"></p>
+        </div>
+        <div class="dtext">
+          <p class="kicker" id="dKicker"></p>
+          <h2 id="dTitle"></h2>
+          <div id="dMedia"></div>
+          <div id="dContent"></div>
+          <div id="dSrc"></div>
+        </div>
+      </div>
+      <div class="dnav" id="dNav">
+        <button class="btn-ghost" id="dPrev" type="button">‹ Previous</button>
+        <span id="dCount" aria-live="polite"></span>
+        <button class="btn-ghost" id="dNext" type="button">Next ›</button>
+      </div>
+    </section>
+  </div>
+
+  <!-- ================= GALLERY LIGHTBOX ================= -->
+  <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Enlarged image">
+    <button class="close" type="button" id="lbClose" aria-label="Close the enlarged image">✕</button>
+    <button class="lb-arrow prev" id="lbPrev" type="button" aria-label="Previous image">‹</button>
+    <figure>
+      <img id="lbImg" alt="">
+      <figcaption><b id="lbTitle"></b><span id="lbCap"></span><span id="lbCredit" class="lb-credit"></span></figcaption>
+    </figure>
+    <button class="lb-arrow next" id="lbNext" type="button" aria-label="Next image">›</button>
+  </div>
+
+  <script src="culture.js"></script>
+</body>
+</html>

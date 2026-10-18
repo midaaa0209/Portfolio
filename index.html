@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hamidah's Luxury Portfolio Box</title>
+  <meta name="description" content="An interactive luxury gift box portfolio of Hamidah H. Gunting.">
+
+  <!-- Fonts (optional - the site falls back to system fonts if offline) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- All styling lives in styles.css -->
+  <link rel="stylesheet" href="styles.css">
+  <script>try{if(sessionStorage.getItem('curtain')==='1')document.documentElement.classList.add('arriving')}catch(e){}</script>
+</head>
+<body>
+  <!-- Page transition curtain (plays when you move between page 1 and page 2) -->
+  <div class="curtain" id="curtain" aria-hidden="true"><div class="half l"></div><div class="half r"></div><div class="seal">✦</div></div>
+
+  <noscript>This interactive portfolio needs JavaScript turned on to open the box.</noscript>
+
+  <header class="topbar">
+    <p class="eyebrow">A little box about me</p>
+    <h1 class="title">Hamidah's Box</h1>
+    <p class="hint" id="hint" aria-live="polite">Click the box to open it</p>
+  </header>
+
+  <!-- ================= THE LUXURY BOX SCENE ================= -->
+  <main class="scene" id="scene">
+    <div class="ground-shadow" aria-hidden="true"></div>
+    <div class="sparks" id="sparks" aria-hidden="true"></div>
+
+    <div class="float">
+      <div class="tilt-layer" id="tiltLayer">
+        <div class="box" id="box">
+
+          <!-- Box walls (back, front, left, right) -->
+          <div class="wall back" aria-hidden="true"></div>
+          <div class="wall left" aria-hidden="true"></div>
+          <div class="wall right" aria-hidden="true"></div>
+
+          <!-- Floor with the four objects -->
+          <div class="floor" id="floor">
+
+            <!-- OBJECT 1: Photo frame / Polaroid -> About Me -->
+            <div class="slot" style="--i:0">
+              <button class="item item-frame" id="itemFrame" data-target="profile" aria-label="Open my profile photo and About Me">
+                <span class="item-label">About Me</span>
+                <span class="lift">
+                  <span class="tiltable polaroid">
+                    <span class="tape" aria-hidden="true"></span>
+                    <span class="polaroid-photo"><img id="polaroidImg" alt="Photo of Hamidah (placeholder until a photo is added)"></span>
+                    <span class="polaroid-cap">Hamidah ✦ Bambi</span>
+                  </span>
+                </span>
+              </button>
+            </div>
+
+            <!-- OBJECT 2: Album collection -> Top 5 songs (buttons are built by script.js) -->
+            <div class="slot" style="--i:1">
+              <div class="item item-albums" role="group" aria-label="My top five songs. Choose an album to play.">
+                <span class="item-label">My Top 5 Songs</span>
+                <span class="lift">
+                  <span class="tray"><span class="album-grid" id="albumGrid"></span></span>
+                </span>
+              </div>
+            </div>
+
+            <!-- OBJECT 3: Certificates folder -> Education, skills, achievements -->
+            <div class="slot" style="--i:2">
+              <button class="item item-folder" id="itemFolder" data-target="certs" aria-label="Open certificates and awards">
+                <span class="item-label">Certificates &amp; Awards</span>
+                <span class="lift">
+                  <span class="tiltable folder">
+                    <span class="folder-tab" aria-hidden="true"></span>
+                    <span class="folder-back" aria-hidden="true"></span>
+                    <span class="fcard c1" aria-hidden="true"></span>
+                    <span class="fcard c2" aria-hidden="true"></span>
+                    <span class="folder-front">
+                      <span class="seal-star" aria-hidden="true">★</span>
+                      <span class="folder-title">Certificates<br>&amp; Awards</span>
+                    </span>
+                    <span class="shine" aria-hidden="true"></span>
+                  </span>
+                </span>
+              </button>
+            </div>
+
+            <!-- OBJECT 4: Personal letter -> Future goals and quotes -->
+            <div class="slot" style="--i:3">
+              <button class="item item-letter" id="itemLetter" data-target="letter" aria-label="Open my personal letter">
+                <span class="item-label">My Letter</span>
+                <span class="lift">
+                  <span class="tiltable mini-env">
+                    <span class="flap" aria-hidden="true"></span>
+                    <span class="wax" aria-hidden="true">H</span>
+                    <span class="env-to" aria-hidden="true">for you</span>
+                  </span>
+                </span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Front wall is drawn after the floor so it sits in front of the objects -->
+          <div class="wall front" aria-hidden="true"></div>
+
+          <!-- The lid: click to open -->
+          <div class="lid" id="lid">
+            <div class="lid-top">
+              <span class="ribbon h"></span>
+              <span class="ribbon v"></span>
+              <span class="plaque"><span class="plaque-small">a box of</span><span class="plaque-name">Hamidah</span></span>
+            </div>
+            <div class="lid-inner"></div>
+            <div class="skirt f"></div>
+            <div class="skirt b"></div>
+            <div class="skirt l"></div>
+            <div class="skirt r"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Accessible open button (also triggered by clicking/tapping the lid) -->
+    <button class="open-btn" id="openBtn" type="button">Click to Open</button>
+  </main>
+
+  <!-- ================= OVERLAYS ================= -->
+
+  <!-- Profile -->
+  <div class="overlay" id="profileOverlay" hidden>
+    <section class="panel profile-panel" role="dialog" aria-modal="true" aria-labelledby="profileName">
+      <button class="close" type="button" data-close aria-label="Close profile and return to the box">✕</button>
+      <div class="panel-body" id="profileBody"></div>
+    </section>
+  </div>
+
+  <!-- Music player -->
+  <div class="overlay" id="playerOverlay" hidden>
+    <section class="panel player-panel" role="dialog" aria-modal="true" aria-label="Music player">
+      <button class="close" type="button" data-close aria-label="Close music player and return to the box">✕</button>
+      <div class="panel-body player">
+        <div class="player-left">
+          <div class="art-wrap">
+            <div class="vinyl" id="vinyl" aria-hidden="true"><span></span></div>
+            <img class="art" id="pArt" alt="">
+          </div>
+        </div>
+        <div class="player-right">
+          <p class="kicker">Now selected · <span id="pCount">1 / 5</span></p>
+          <h2 id="pTitle" class="song-title">Song</h2>
+          <p id="pArtist" class="song-artist">Artist</p>
+
+          <div class="seek">
+            <span id="pCur">0:00</span>
+            <input id="pSeek" type="range" min="0" max="1000" value="0" step="1" aria-label="Song progress">
+            <span id="pDur">--:--</span>
+          </div>
+
+          <div class="controls">
+            <button class="ctl" id="pPrev" type="button" aria-label="Previous song">
+              <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 5h2v14H6zM20 5v14L9.5 12z" fill="currentColor"/></svg>
+            </button>
+            <button class="ctl ctl-main" id="pPlay" type="button" aria-label="Play">
+              <svg class="i-play" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+              <svg class="i-pause" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" hidden><path d="M7 5h4v14H7zM13 5h4v14h-4z" fill="currentColor"/></svg>
+            </button>
+            <button class="ctl" id="pNext" type="button" aria-label="Next song">
+              <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M16 5h2v14h-2zM4 5v14l10.5-7z" fill="currentColor"/></svg>
+            </button>
+          </div>
+
+          <p class="status" id="pStatus" role="status" aria-live="polite"></p>
+          <ol class="tracklist" id="pList" aria-label="Song list"></ol>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Certificates carousel -->
+  <div class="overlay" id="certsOverlay" hidden>
+    <section class="panel certs-panel" role="dialog" aria-modal="true" aria-label="Certificates and awards">
+      <button class="close" type="button" data-close aria-label="Close certificates and return to the box">✕</button>
+      <div class="panel-body certs">
+        <p class="kicker center">Certificates &amp; Awards</p>
+        <div class="cviewport" id="cViewport"><div class="ctrack" id="cTrack"></div></div>
+        <div class="cnav">
+          <button class="ctl" id="cPrev" type="button" aria-label="Previous card">‹</button>
+          <div class="dots" id="cDots" role="tablist" aria-label="Choose a card"></div>
+          <button class="ctl" id="cNext" type="button" aria-label="Next card">›</button>
+        </div>
+        <p class="swipe-hint">Swipe, use the arrows, or press ← →</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- Letter -->
+  <div class="overlay" id="letterOverlay" hidden>
+    <section class="panel letter-panel" role="dialog" aria-modal="true" aria-label="My personal letter">
+      <button class="close" type="button" data-close aria-label="Close letter and return to the box">✕</button>
+      <div class="letter-stage">
+        <div class="envelope" id="envelope" aria-hidden="true">
+          <div class="env-back"></div>
+          <div class="env-flap"></div>
+          <div class="env-front"></div>
+          <div class="env-seal">H</div>
+        </div>
+
+        <article class="sheet" id="sheet" hidden>
+          <div class="sheet-inner">
+            <p class="hand big">Dear visitor,</p>
+            <p class="sheet-intro">Thank you for opening my box. Here is what I am dreaming of, and a few words I really like.</p>
+
+            <!-- SECTION A -->
+            <section class="goals" aria-labelledby="goalsTitle">
+              <h3 id="goalsTitle"><span>A</span> My Future Goals</h3>
+              <ol class="roadmap" id="roadmap"></ol>
+            </section>
+
+            <!-- SECTION B -->
+            <section class="quotes" aria-labelledby="quotesTitle">
+              <h3 id="quotesTitle"><span>B</span> Quotes That I Really Like</h3>
+
+              <blockquote class="quote quote-deep">
+                <svg class="quote-line" viewBox="0 0 200 12" aria-hidden="true"><path d="M2 6 C30 -2, 50 14, 80 6 S 140 -2, 198 6"/></svg>
+                <p>“Everything Happens for a Reason.”</p>
+              </blockquote>
+
+              <blockquote class="quote quote-fun" id="funQuote">
+                <span class="zzz" aria-hidden="true"><i>z</i><i>Z</i><i>z</i></span>
+                <p>“Don't give up on your dreams, keep sleeping.”</p>
+                <span class="sleepy" aria-hidden="true">😴</span>
+              </blockquote>
+            </section>
+
+            <!-- PAGE 2 BUTTON: goes to culture.html (the address is set by PAGE_2_URL in script.js) -->
+            <div class="cta-wrap">
+              <a class="cta" id="cultureBtn" href="culture.html" data-transition>
+                <span class="cta-text">know about my culture!</span>
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </div>
+
+  <!-- Photo lightbox -->
+  <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Enlarged photo">
+    <button class="close" type="button" id="lbClose" aria-label="Close enlarged photo">✕</button>
+    <figure>
+      <img id="lbImg" alt="">
+      <figcaption id="lbCap"></figcaption>
+    </figure>
+  </div>
+
+
+  <!-- Background music on/off (the song itself is set by BG_MUSIC in script.js) -->
+  <button class="bgbtn" id="bgBtn" type="button" aria-pressed="false" aria-label="Turn background music off" hidden>
+    <span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+    <span class="bg-label" id="bgLabel">Music on</span>
+  </button>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
